@@ -1,16 +1,16 @@
-import React from "react"
+import React from "react";
 import { graphql } from "gatsby" 
 import Title from "../components/Title/Title"
 
 export default ({data}) => {
     console.log("Test",data)
     
-    const page = data.wpPage
+    const post = data.thePost
     return (
         <div>
-        <Title titlePage={page.title} />
+        <Title titlePost={post.title} />
         <article>
-            <h1>{page.title}</h1>
+            <h1>{post.title}</h1>
             <div dangerouslySetInnerHTML={{__html: page.content}}/>
         </article>
         </div>
@@ -19,9 +19,17 @@ export default ({data}) => {
 
 export const query = graphql`
     query($databaseId: Int!) {
-        wpPage(databaseId: { eq: $databaseId }) {
-            title
+        thePost: wpPost(databaseId: {eq: $databaseId}) {
+            data
+            databaseId
             content
+            title
+            author {
+                node {
+                    name
+                }
+            }
         }
+        
     }
 `

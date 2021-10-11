@@ -44,10 +44,12 @@ pages.forEach(page => {
     
 })
 
+//Generate single post pages
+
 const posts = queryResult.data.postQuery.edges
     posts.forEach(post => {
         createPage({
-             path:'/posts$ {post.node.uri}',
+             path:'/posts${post.node.uri}',
             component: path.resolve("./src/templates/post.js"),
             context: {
                 databaseId: post.node.databaseId,
