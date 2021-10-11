@@ -2,13 +2,14 @@ const path = require("path")
 
 
 const { reporter } = require("gatsby/node_modules/gatsby-cli/lib/reporter/reporter")
-const { default: post } = require("./src/templates/post")
+// const { default: post } = require("./src/templates/post")
 
 exports.createPages = async ({actions, graphql, reporter }) =>{
     const {createPage } = actions
 
     //Query all the data
     const queryResult = await graphql(`
+    {
         pageQuery: allWpPage {
             nodes {
                 databaseId
@@ -22,6 +23,8 @@ exports.createPages = async ({actions, graphql, reporter }) =>{
                 uri
               }
             }
+          }
+        }
 
     `)
 

@@ -11,7 +11,7 @@ export default ({data}) => {
         <Title titlePost={post.title} />
         <article>
             <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{__html: page.content}}/>
+            <div dangerouslySetInnerHTML={{__html: post.content}}/>
         </article>
         </div>
     )
@@ -20,16 +20,17 @@ export default ({data}) => {
 export const query = graphql`
     query($databaseId: Int!) {
         thePost: wpPost(databaseId: {eq: $databaseId}) {
-            data
+            id
+            date
             databaseId
             content
             title
             author {
-                node {
-                    name
-                }
+              node {
+                name
+              }
             }
-        }
+          }
         
     }
 `
